@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "bripinfo"
+version = "0.1.0"
+description = "Uma maneira fácil de obter dados relativos a um IP associado ao Registro.br."
+authors = ["Rogerio Paulo <rogeriopaulos@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+requests = "^2.25.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^4.6"
+flake8 = "^3.8.4"
+flake8-isort = "^4.0.0"
+ipython = "^7.19.0"
+autopep8 = "^1.5.4"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
