@@ -95,7 +95,3 @@ def setup():
         settings.LOGGER.info('Os dados do Registro.br encontram-se atualizados.')
 
     settings.LOGGER.info('Configuração finalizada!')
-
-
-if __name__ == "__main__":
-    setup()

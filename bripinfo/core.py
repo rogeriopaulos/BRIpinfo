@@ -1,3 +1,4 @@
+import csv
 import json
 import os
 from abc import ABCMeta, abstractmethod
@@ -50,7 +51,7 @@ class BaseData(metaclass=ABCMeta):
 
 class Output:
 
-    filename = settings.CONFIG['registro.br']['main_file'].split('/')[-1]
+    _remote_filename = settings.CONFIG['registro.br']['main_file'].split('/')[-1]
 
     def __init__(self):
         self._raw_data = self._get_main_content()
@@ -62,18 +63,38 @@ class Output:
 
     def _get_filepath(self):
         filedir = f'{settings.APP_DIR}/_files'
-        return f'{filedir}/{self.filename}.json'
+        return f'{filedir}/{self._remote_filename}.json'
 
     def to_list(self):
+        """
+        Return a list of dicts
+        """
         return self._raw_data
 
     def to_json(self, filename=None, destination=os.getcwd()):
-        filename = filename if filename else self.filename
-        filename = self.split('.')[0]
-        fullpath = f'{destination}/{filename}.json'
+        try:
+            fullpath = self._get_fullpath_by_ext(filename, destination, 'json')
+            with open(fullpath, 'w', encoding='utf-8') as outfile:
+                json.dump(self._raw_data, outfile, ensure_ascii=False)
+        except IOError:
+            settings.LOGGER.error('I/O error')
 
-        with open(fullpath, 'w', encoding='utf-8') as outfile:
-            json.dump(self._raw_data, outfile, ensure_ascii=False)
+    def to_csv(self, filename=None, destination=os.getcwd()):
+        fullpath = self._get_fullpath_by_ext(filename, destination, 'csv')
+        csv_columns = list(self._raw_data[0].keys())
 
-    def to_csv(self):
-        print('save csv')
+        try:
+            with open(fullpath, 'w') as csvfile:
+                writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+                writer.writeheader()
+                for data in self._raw_data:
+                    writer.writerow(data)
+        except IOError:
+            settings.LOGGER.error('I/O error')
+
+    def _get_fullpath_by_ext(self, name, destination, ext):
+        filename = name if name else self._remote_filename
+        if filename == self._remote_filename:
+            filename = filename.split('.')[0]
+
+        return f'{destination}/{filename}.{ext}'
