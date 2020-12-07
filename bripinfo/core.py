@@ -4,9 +4,8 @@ import os
 from abc import ABCMeta, abstractmethod
 
 import requests
+import settings
 from requests.exceptions import ConnectionError
-
-from bripinfo import settings
 
 
 class BaseData(metaclass=ABCMeta):

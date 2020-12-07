@@ -1,8 +1,8 @@
 import datetime as dt
 import json
 
-from bripinfo import settings
-from bripinfo.core import BaseData
+import settings
+from core import BaseData
 
 
 class RegistroBrMetadata(BaseData):
