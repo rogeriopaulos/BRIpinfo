@@ -83,7 +83,7 @@ class RegistroBrData(BaseData):
         return True
 
 
-def setup():
+def setup_registrobr():
     metadata = RegistroBrMetadata()
     is_equal_sha256 = metadata.equal_sha256
     if not is_equal_sha256:

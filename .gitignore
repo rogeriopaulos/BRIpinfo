@@ -132,4 +132,5 @@ dmypy.json
 .vscode
 
 # Project
-bripinfo/_files/*
+bripinfo/.files/*
+!bripinfo/.files/.gitkeep

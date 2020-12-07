@@ -17,7 +17,7 @@ class BaseData(metaclass=ABCMeta):
     @property
     def _full_filepath(self):
         output_filename = self._get_remote_filename()
-        return f'{settings.APP_DIR}/_files/{output_filename}.json'
+        return f'{settings.APP_DIR}/.files/{output_filename}.json'
 
     def _get_remote_filename(self):
         return self.url.split('/')[-1]
@@ -51,19 +51,24 @@ class BaseData(metaclass=ABCMeta):
 
 class Output:
 
-    _remote_filename = settings.CONFIG['registro.br']['main_file'].split('/')[-1]
+    def __init__(self, filename, destination):
+        self.filename = filename
+        self.destination = destination
 
-    def __init__(self):
         self._raw_data = self._get_main_content()
 
     def _get_main_content(self):
-        with open(self._get_filepath(), 'r') as f:
-            data = json.load(f)
-        return data
+        try:
+            with open(self._get_filepath(), 'r') as f:
+                data = json.load(f)
+            return data
+        except FileNotFoundError:
+            settings.LOGGER.error('Carreque os dados do Registro.br antes...')
 
     def _get_filepath(self):
-        filedir = f'{settings.APP_DIR}/_files'
-        return f'{filedir}/{self._remote_filename}.json'
+        filedir = f'{settings.APP_DIR}/.files'
+        remote_filename = settings.CONFIG['registro.br']['main_file'].split('/')[-1]
+        return f'{filedir}/{remote_filename}.json'
 
     def to_list(self):
         """
@@ -71,16 +76,17 @@ class Output:
         """
         return self._raw_data
 
-    def to_json(self, filename=None, destination=os.getcwd()):
+    def to_json(self):
         try:
-            fullpath = self._get_fullpath_by_ext(filename, destination, 'json')
+            fullpath = f'{self.destination}/{self.filename}.json'
             with open(fullpath, 'w', encoding='utf-8') as outfile:
                 json.dump(self._raw_data, outfile, ensure_ascii=False)
+                settings.LOGGER.info(f'Arquivo salvo: {fullpath}')
         except IOError:
             settings.LOGGER.error('I/O error')
 
-    def to_csv(self, filename=None, destination=os.getcwd()):
-        fullpath = self._get_fullpath_by_ext(filename, destination, 'csv')
+    def to_csv(self):
+        fullpath = f'{self.destination}/{self.filename}.csv'
         csv_columns = list(self._raw_data[0].keys())
 
         try:
@@ -89,12 +95,6 @@ class Output:
                 writer.writeheader()
                 for data in self._raw_data:
                     writer.writerow(data)
+                settings.LOGGER.info(f'Arquivo salvo: {fullpath}')
         except IOError:
             settings.LOGGER.error('I/O error')
-
-    def _get_fullpath_by_ext(self, name, destination, ext):
-        filename = name if name else self._remote_filename
-        if filename == self._remote_filename:
-            filename = filename.split('.')[0]
-
-        return f'{destination}/{filename}.{ext}'
