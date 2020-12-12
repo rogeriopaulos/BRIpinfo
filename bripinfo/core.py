@@ -23,11 +23,11 @@ class BaseData(metaclass=ABCMeta):
 
     def _get_remote_content(self):
         try:
-            settings.LOGGER.info(f'Obtendo {self.content_name} do Registro.br (ftp)')
+            settings.LOGGER.info(f'Obtendo {self.content_name} do {self.source}')
             response = requests.get(self.url)
             return response.text
         except ConnectionError:
-            settings.LOGGER.error('Não foi possível obter os dados do Registro.br (ftp)')
+            settings.LOGGER.error(f'Não foi possível obter os dados do {self.source}')
 
     def create_or_update(self):
         if not os.path.exists(self._full_filepath) or self._can_save():
@@ -39,7 +39,7 @@ class BaseData(metaclass=ABCMeta):
 
     def _write_file(self):
         data = self._data()
-        settings.LOGGER.info(f'Salvando arquivo de {self.content_name} do Registro.br')
+        settings.LOGGER.info(f'Salvando arquivo de {self.content_name} do {self.source}')
         with open(self._full_filepath, 'w', encoding='latin1') as outfile:
             json.dump(data, outfile, ensure_ascii=False)
 
@@ -58,11 +58,11 @@ class Output:
 
     def _get_main_content(self):
         try:
-            with open(self._get_filepath(), 'r') as f:
+            with open(self._get_filepath(), 'r', encoding='utf-8') as f:
                 data = json.load(f)
             return data
         except FileNotFoundError:
-            settings.LOGGER.error('Carreque os dados do Registro.br antes...')
+            settings.LOGGER.error('Por favor, carregue os dados antes...')
 
     def _get_filepath(self):
         filedir = f'{settings.APP_DIR}/.files'
@@ -89,7 +89,7 @@ class Output:
         csv_columns = list(self._raw_data[0].keys())
 
         try:
-            with open(fullpath, 'w') as csvfile:
+            with open(fullpath, 'w', newline='', encoding='utf-8') as csvfile:
                 writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
                 writer.writeheader()
                 for data in self._raw_data:

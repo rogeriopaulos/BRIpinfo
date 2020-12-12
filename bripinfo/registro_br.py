@@ -16,6 +16,7 @@ class RegistroBrMetadata(BaseData):
 
     url = settings.CONFIG['registro.br']['sha256_mainfile']
     content_name = 'metadados'
+    source = 'Registro.br'
 
     def __init__(self):
         super().__init__()
