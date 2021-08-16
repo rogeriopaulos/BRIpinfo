@@ -63,6 +63,7 @@ class RegistroBrData(BaseData):
 
     url = settings.CONFIG['registro.br']['main_file']
     content_name = 'conteúdo'
+    source = 'Registro.br'
 
     def _data(self) -> dict:
         content = self._raw_content
