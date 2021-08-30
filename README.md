@@ -105,4 +105,4 @@ Este projeto segue as diretrizes do versionamento semântico (SemVer). Para maio
 
 ## Licença
 
-Veja o arquivo [LICENÇAS](docs/LICENSE.md) para saber os direitos e limitações da licença aplicada neste projeto (*MIT*).
+Veja o arquivo [LICENÇAS](LICENSE) para saber os direitos e limitações da licença aplicada neste projeto (*MIT*).
