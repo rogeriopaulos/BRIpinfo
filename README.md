@@ -1,5 +1,6 @@
 # BRIpinfo
 
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/rogeriopaulos/BRIpinfo?label=BRIpinfo&style=flat-square)
 ![Python](https://img.shields.io/badge/python-3.8%2B-yellowgreen?style=flat-square)
 ![GitHub](https://img.shields.io/github/license/rogeriopaulos/BRIpinfo?style=flat-square)
 
