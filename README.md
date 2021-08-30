@@ -89,13 +89,13 @@ Options:
 ### Exemplos
 
 ```
-python export
+python bripinfo export
 ```
 ...um arquivo no formato _json_ será gerado no diretório corrente onde a aplicação foi baixada (_git clone_).
 
 
 ```
-python export -f csv -d /home -n "test"
+python bripinfo export -f csv -d /home -n "test"
 ```
 ...um arquivo no formato _csv_, com o nome _"test"_, será gerado no diretório __"/home"__.
 
