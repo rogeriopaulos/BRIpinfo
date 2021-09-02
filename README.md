@@ -1,4 +1,4 @@
-# BRIpinfo
+# BrIpInfo
 
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/rogeriopaulos/BRIpinfo?label=BRIpinfo&style=flat-square)
 ![Python](https://img.shields.io/badge/python-3.8%2B-yellowgreen?style=flat-square)
@@ -8,7 +8,7 @@ Uma maneira fácil de obter dados relativos a um IP/bloco CIDR associado a um fo
 
 Periodicamente, o [Registro.br](https://registro.br/) disponibiliza, via [ftp](https://ftp.registro.br/pub/numeracao/origin/nicbr-asn-blk-latest.txt), uma listagem (em um arquivo _.txt_) dos IPs/blocos CIDR ativos no Brasil, bem como a qual fornecedor de serviço de internet o mesmo é associado (juntamente com seu CNPJ).
 
-A partir do desse arquivo, o BRIpinfo analisa e estrutura esses dados de uma forma amigável, permitindo a exportação do mesmo para os formatos _json_ ou _csv_.
+A partir do desse arquivo, o BrIpInfo analisa e estrutura esses dados de uma forma amigável, permitindo a exportação do mesmo para os formatos _json_ ou _csv_.
 
 ## Features
 
