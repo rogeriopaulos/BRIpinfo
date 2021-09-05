@@ -106,16 +106,7 @@ class Query:
         self.listdata = listdata
 
     def query_by_ip(self, term: str) -> list:
-        result = []
-        for isp in self.listdata:
-            flat_ips = [ip.split('/')[0] for ip in isp['ips']]  # remove CIDR block
-            if ':' in term:  # ipv6
-                term_initial = ':'.join(term.split(':')[:2])
-            else:  # ipv4
-                term_initial = '.'.join('200.128.224.0'.split('.')[:3])
+        ...
 
     def query_by_cnpj(self, term: str) -> list:
         return [isp for isp in self.listdata if re.sub("[^0-9]", "", isp.get('cnpj')).startswith(term)]
-
-    # def _search(self, key: str, term: str) -> list:
-    #     return [item for item in self.listdata if item[key] == term]
