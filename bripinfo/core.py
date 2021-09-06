@@ -1,5 +1,5 @@
-import ipaddress
 import csv
+import ipaddress
 import json
 import os
 import re
@@ -8,6 +8,10 @@ from abc import ABCMeta, abstractmethod
 import requests
 import settings
 from requests.exceptions import ConnectionError
+
+_current_dir = os.getcwd()
+_remote_file = settings.CONFIG['registro.br']['main_file'].split('/')[-1]
+_remote_filename = _remote_file.split('.')[0]
 
 
 class BaseData(metaclass=ABCMeta):
@@ -52,7 +56,7 @@ class BaseData(metaclass=ABCMeta):
 
 class Output:
 
-    def __init__(self, filename, destination):
+    def __init__(self, filename=_remote_filename, destination=_current_dir):
         self.filename = filename
         self.destination = destination
 

@@ -1,13 +1,8 @@
-import os
+import json
 
 import click
-import settings
-from core import Output
+from core import Output, Query, _current_dir, _remote_filename
 from registro_br import setup_registrobr
-
-_current_dir = os.getcwd()
-_remote_file = settings.CONFIG['registro.br']['main_file'].split('/')[-1]
-_remote_filename = _remote_file.split('.')[0]
 
 
 @click.group()
@@ -35,7 +30,22 @@ def export(format, destination, name):
         click.echo('Choose one of the following formats: [json, csv]')
 
 
+@click.command(help='Query IP or CNPJ from Registro.br.')
+@click.option('--type', '-t', help='Type of query: [ip, cnpj]')
+@click.option('--search', '-s', help='Term to searched (ip or cnpj). Ex: 192.168.0.22 (ip) | 10942479000139 (cnpj)')
+def query(type, search):
+    qs = Query(Output().to_list())
+
+    if type == 'ip':
+        click.secho(json.dumps(qs.query_by_ip(search), indent=4, sort_keys=True), fg='green')
+    elif type == 'cnpj':
+        click.secho(json.dumps(qs.query_by_cnpj(search), indent=4, sort_keys=True), fg='green')
+    else:
+        click.echo('Choose one of the following valid types: [ip, cnpj]')
+
+
 cli.add_command(setup)
 cli.add_command(export)
+cli.add_command(query)
 
 cli()
