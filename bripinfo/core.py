@@ -1,3 +1,4 @@
+import ipaddress
 import csv
 import json
 import os
@@ -105,8 +106,15 @@ class Query:
     def __init__(self, listdata: list):
         self.listdata = listdata
 
-    def query_by_ip(self, term: str) -> list:
-        ...
+    def query_by_ip(self, term: str) -> dict:
+        try:
+            return next(isp for isp in self.listdata for ip in isp['ips']
+                        if ipaddress.ip_address(term) in ipaddress.ip_network(ip))
+        except ValueError:
+            settings.LOGGER.error('Esse endereço de IP não é válido.')
 
-    def query_by_cnpj(self, term: str) -> list:
-        return [isp for isp in self.listdata if re.sub("[^0-9]", "", isp.get('cnpj')).startswith(term)]
+    def query_by_cnpj(self, term: str) -> dict:
+        try:
+            return next(isp for isp in self.listdata if re.sub("[^0-9]", "", isp.get('cnpj')).startswith(term))
+        except StopIteration:
+            settings.LOGGER.error('Esse CNPJ não é válido. Informe apenas os números.')
