@@ -68,6 +68,7 @@ Options:
 
 Commands:
   export  Export data from registro.br to json/csv.
+  query   Query IP or CNPJ from Registro.br.
   setup   Load data from registro.br.
 ```
 
@@ -86,6 +87,21 @@ Options:
   --help                  Show this message and exit.
 ```
 
+### Consulta
+
+```
+Usage: bripinfo query [OPTIONS]
+
+  Query IP or CNPJ from Registro.br.
+
+Options:
+  -t, --type TEXT    Type of query: [ip, cnpj]
+  -s, --search TEXT  Term to searched (ip or cnpj). Ex: 192.168.0.22 (ip) |
+                     10942479000139 (cnpj)
+
+  --help             Show this message and exit.
+```
+
 ### Exemplos
 
 ```
@@ -98,6 +114,23 @@ python bripinfo export
 python bripinfo export -f csv -d /home -n "test"
 ```
 ...um arquivo no formato _csv_, com o nome _"test"_, será gerado no diretório __"/home"__.
+
+```
+python bripinfo query -t ip -s "186.241.20.224"
+
+# output
+{
+    "cnpj": "33.000.118/0001-79",
+    "ips": [
+        "200.223.0.0/16",
+        "200.199.0.0/17",
+        (...)
+    ],
+    "name": "Telemar Norte Leste S.A.",
+    "ref": "AS7738"
+}
+```
+
 
 ## Versionamento
 
