@@ -14,7 +14,7 @@ class RegistroBrMetadata(BaseData):
     }
     """
 
-    url = settings.CONFIG['registro.br']['sha256_mainfile']
+    url = settings.CONFIG['registro_br']['sha256_mainfile']
     content_name = 'metadados'
     source = 'Registro.br'
 
@@ -61,7 +61,7 @@ class RegistroBrData(BaseData):
     }, (...)]
     """
 
-    url = settings.CONFIG['registro.br']['main_file']
+    url = settings.CONFIG['registro_br']['main_file']
     content_name = 'conteúdo'
     source = 'Registro.br'
 

@@ -10,7 +10,7 @@ from bripinfo import settings
 from requests.exceptions import ConnectionError
 
 _current_dir = os.getcwd()
-_remote_file = settings.CONFIG['registro.br']['main_file'].split('/')[-1]
+_remote_file = settings.CONFIG['registro_br']['main_file'].split('/')[-1]
 _remote_filename = _remote_file.split('.')[0]
 
 
@@ -72,7 +72,7 @@ class Output:
 
     def _get_filepath(self):
         filedir = f'{settings.APP_DIR}/.files'
-        remote_filename = settings.CONFIG['registro.br']['main_file'].split('/')[-1]
+        remote_filename = settings.CONFIG['registro_br']['main_file'].split('/')[-1]
         return f'{filedir}/{remote_filename}.json'
 
     def to_list(self):
