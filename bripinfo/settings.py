@@ -1,11 +1,14 @@
-import configparser
 import logging
 import os
 
 # Configs (.ini)
 # ------------------------------------------------------------------------------
-CONFIG = configparser.ConfigParser()
-CONFIG.read('bripinfo/config.ini')
+CONFIG = {
+    'registro_br': {
+        'main_file': 'https://ftp.registro.br/pub/numeracao/origin/nicbr-asn-blk-latest.txt',
+        'sha256_mainfile': 'https://ftp.registro.br/pub/numeracao/origin/nicbr-asn-blk-latest.txt.sha256'
+    }
+}
 
 # General
 # ------------------------------------------------------------------------------
