@@ -1,6 +1,7 @@
 import json
 
 import click
+
 from bripinfo.core import Output, Query, _current_dir, _remote_filename
 from bripinfo.registro_br import setup_registrobr
 

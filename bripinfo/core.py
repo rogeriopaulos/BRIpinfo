@@ -6,8 +6,9 @@ import re
 from abc import ABCMeta, abstractmethod
 
 import requests
-from bripinfo import settings
 from requests.exceptions import ConnectionError
+
+from bripinfo import settings
 
 _current_dir = os.getcwd()
 _remote_file = settings.CONFIG['registro_br']['main_file'].split('/')[-1]
