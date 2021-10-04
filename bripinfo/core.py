@@ -6,7 +6,7 @@ import re
 from abc import ABCMeta, abstractmethod
 
 import requests
-import settings
+from bripinfo import settings
 from requests.exceptions import ConnectionError
 
 _current_dir = os.getcwd()

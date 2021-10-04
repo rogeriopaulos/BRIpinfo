@@ -1,8 +1,8 @@
 import json
 
 import click
-from core import Output, Query, _current_dir, _remote_filename
-from registro_br import setup_registrobr
+from bripinfo.core import Output, Query, _current_dir, _remote_filename
+from bripinfo.registro_br import setup_registrobr
 
 
 @click.group()
