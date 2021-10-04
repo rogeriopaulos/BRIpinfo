@@ -1,8 +1,13 @@
 [tool.poetry]
 name = "bripinfo"
-version = "0.1.0"
+version = "1.1"
 description = "Uma maneira fácil de obter dados relativos a um IP associado ao Registro.br."
 authors = ["Rogerio Paulo <rogeriopaulos@gmail.com>"]
+readme = "README.md"
+homepage = "https://github.com/rogeriopaulos/BRIpinfo"
+repository = "https://github.com/rogeriopaulos/BRIpinfo"
+documentation = "https://github.com/rogeriopaulos/BRIpinfo"
+license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.8"
