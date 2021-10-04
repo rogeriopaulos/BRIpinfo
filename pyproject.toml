@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "bripinfo"
-version = "1.2"
+version = "1.2.1"
 description = "Uma maneira fácil de obter dados relativos a um IP associado ao Registro.br."
 authors = ["Rogerio Paulo <rogeriopaulos@gmail.com>"]
 readme = "README.md"
