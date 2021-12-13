@@ -122,4 +122,6 @@ class Query:
         try:
             return next(isp for isp in self.listdata if re.sub("[^0-9]", "", isp.get('cnpj')).startswith(term))
         except StopIteration:
-            settings.LOGGER.error('Esse CNPJ não é válido. Informe apenas os números.')
+            settings.LOGGER.error(
+                'Esse CNPJ não é válido. Informe apenas os números ou garanta que o CNPJ seja de uma ISP.'
+            )
