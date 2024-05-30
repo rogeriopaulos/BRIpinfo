@@ -70,6 +70,7 @@ class RegistroBrData(BaseData):
 
         settings.LOGGER.info('Estruturando o conteúdo do Registro.br')
         content = [line.split('|') for line in content.splitlines()]
+
         dataset = [
             {
                 'ref': line[0],
@@ -77,7 +78,9 @@ class RegistroBrData(BaseData):
                 'cnpj': line[2],
                 'ips': list(line[3:])
             }
-            for line in content]
+            for line in content
+            if len(line) > 3
+        ]
 
         return dataset
 
